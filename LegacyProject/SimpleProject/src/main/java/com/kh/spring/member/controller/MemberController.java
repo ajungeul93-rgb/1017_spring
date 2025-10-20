@@ -174,7 +174,9 @@ public class MemberController {
 	}
 	
 	@PostMapping("signup")
-	public String signup() {
+	public String signup(MemberDto member) {
+		
+		log.info("{}",member);
 		
 		return "redirect:join";
 	}
