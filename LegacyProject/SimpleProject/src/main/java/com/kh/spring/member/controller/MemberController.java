@@ -1,14 +1,12 @@
 package com.kh.spring.member.controller;
 
-import java.io.UnsupportedEncodingException;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spring.member.model.dto.MemberDto;
@@ -191,6 +189,57 @@ public class MemberController {
 		*/
 		log.info("{}",member);
 		memberService.signUp(member);
-		return "redirect:join";
+		return "main";
+	}
+	
+	@GetMapping("mypage")
+	public String myPage() {
+		return "member/my_page";
+	}
+	
+	@PostMapping("edit")
+	public String edit(MemberDto member, HttpSession session) {
+		/*
+		 * 1_1) 404 발생 : mapping값 확인하기
+		 * org.springframework.web.servlet.PageNotFound
+		 * 
+		 * 1_2) 405 발생 : mapping값 잘씀 type을 GET/POST를 잘못적었을 때
+		 * 
+		 * 1_3) 필드에 값이 잘 들어왔나?? - key값 확인
+		 * 
+		 */
+		log.info("값 찍어보기 : {}", member);
+		
+		/*
+		 * 2. SQL문
+		 * UPDATE => MEMBER => PK?
+		 * ID PWD NAME EMAIL ENROLLDATE
+		 * 
+		 * 2_1) 매개변수 MemberDto타입의 memberId필드값 조건
+		 * UPDATE MEMBER SET USER_NAME = 입력한 값, EMAIL = 입력한 값
+		 * WHERE USER_ID = 넘어온 아이디
+   		 */
+		
+		/*
+		 * Best Practice
+		 * 
+		 * 실무 권장
+		 * 
+		 * 컨트롤러에서 세션관리를 담당
+		 * 서비스에는 순수 비즈니스 로직만 구현
+		 * 서비스에서 HttpSession이 필요하다면 인자로 전달
+		 */
+		
+		memberService.update(member, session);
+		
+		return "redirect:mypage";
+	}
+	
+	@PostMapping("delete")
+	public String delete(@RequestParam(value="userPwd") String userPwd, HttpSession session) {
+		
+		memberService.delete(userPwd, session);
+		session.removeAttribute(userPwd);
+		return "redirect:/";
 	}
 }

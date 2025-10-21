@@ -1,5 +1,7 @@
 package com.kh.spring.member.model.service;
 
+import javax.servlet.http.HttpSession;
+
 import com.kh.spring.member.model.dto.MemberDto;
 
 public interface MemberService {
@@ -16,9 +18,9 @@ public interface MemberService {
 	void signUp(MemberDto member);
 	
 	// 정보수정
-	void update(MemberDto member);
+	void update(MemberDto member, HttpSession session);
 	
 	// 탈퇴
-	void delete(MemberDto member);
+	void delete(String userPwd, HttpSession session);
 
 }
