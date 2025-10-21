@@ -178,6 +178,18 @@ public class MemberServiceImpl implements MemberService {
 		
 		
 		// 리팩토링
+		/*
+		 * 쉬운데 어려움(복잡함)
+		 * 
+		 * 세팅 수업시간에 했던거 다 가져다쓰세요
+		 * 
+		 * 스프링을 이용한 기능구현 ==> 숙제(주말까지)
+		 * 
+		 * DynamicWebProject 회원(KH_MEMBER)파트 ==> Spring버전으로 다시 만들기
+		 * 
+		 * Service단 및 예외처리를 신경써보자
+		 * 
+		 */
 		
 	}
 
