@@ -191,17 +191,20 @@
 	<script>
 		function btn1(){
 			$.ajax({
-				url : 'revol/a',
+				url : 'revol/c', 
+				type : 'post',
 				success : res => {
-					alert(res.boardTitle);
+					//alert(res.boardTitle);
+					console.log(res);
 				}
 			})
 		}
 		function btn2(){
 			$.ajax({
-				url : 'revol/b',
+				url : 'revol/d',
 				success : res => {
-					alert(res.boardTitle);
+					//alert(res.boardTitle);
+					console.log(res);
 				}
 			})
 		}
